@@ -1,0 +1,14 @@
+{
+    "noDataAvailable": "No Data Available",
+    "user": {
+        "clear": "Clear",
+        "search": "Search",
+        "fullName": "Full Name",
+        "email": "Email",
+        "mobileNumber": "Mobile Number",
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page",
+        "of": "of"
+    }
+}

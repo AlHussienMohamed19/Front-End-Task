@@ -1,0 +1,14 @@
+{
+    "noDataAvailable": "لا يوجد بيانات",
+    "user": {
+        "clear": "إزالة",
+        "search":"بحث",
+        "fullName": "الإسم",
+        "email": "البريد الالكتروني",
+        "mobileNumber": "رقم الهاتف",
+        "previous": "السابق",
+        "next": "القادم",
+        "page": "صفحة",
+        "of": "من"
+    }
+}

@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.ngx-toastr {
+    font-family: Arial, sans-serif;
+}
+
+.toast-top-right {
+    position: absolute;
+    top: 70px;
+    right: 40px;
+    z-index: 999;
+}
+
+.toast-error {
+    background-color: #fa4b4b !important;
+    padding: 12px;
+    border-radius: 6px;
+}

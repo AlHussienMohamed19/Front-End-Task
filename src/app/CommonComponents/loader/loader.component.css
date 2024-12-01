@@ -1,0 +1,39 @@
+.spinnerParent {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 999999;
+	background-color: rgba(23, 23, 23, 0.9);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.spinner {
+	width: 72px;
+	height: 72px;
+	position: relative;
+	margin: 100px auto;
+}
+
+.loader {
+	width: 48px;
+	height: 48px;
+	border: 6px solid #FFF;
+	border-bottom-color: #1ED6BB;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 0.5s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

@@ -21,13 +21,22 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets/images/logo/VL_Logo.png",
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/en.css",
+                "bundleName": "en",
+                "inject": false
+              },
+              {
+                "input": "src/ar.css",
+                "bundleName": "ar",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -92,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "4b284ea7-a8bf-4bec-b663-df3b056674f6"
   }
 }

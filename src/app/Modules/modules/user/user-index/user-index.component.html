@@ -1,0 +1,144 @@
+<div class="p-4">
+
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#c0992f" type="ball-pulse-sync" [fullScreen]="true">
+        <p style="color: #1F2937" translate>loading... </p>
+    </ngx-spinner>
+
+    <form *ngIf="userSearchForm" [formGroup]="userSearchForm" (ngSubmit)="onSearch()" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="flex-col">
+                <!-- Name -->
+                <input type="text" formControlName="fullName" class="border p-2 rounded w-full" style="height: 40px;"
+                    [placeholder]="language == 'en' ? 'Full Name' : '  الاسم'" />
+                <div *ngIf="fc['fullName'].invalid">
+                    <span *ngIf="fc['fullName']?.errors?.['maxlength']" translate>
+                        <span
+                            translate>MaxLengthCharacters</span>{{fc['fullName'].errors?.['maxlength'].requiredLength}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex-col">
+                <input type="email" formControlName="email" class="border p-2 rounded w-full" style="height: 40px;"
+                    [placeholder]="language == 'en' ? 'Email' : '  البريد الالكتروني'" />
+                <div *ngIf="fc['email'].invalid" class="mt-1 text-red-600">
+                    <span *ngIf="fc['email']?.errors?.['maxlength']" translate>
+                        <span translate>MaxLengthCharacters</span>{{fc['email'].errors?.['maxlength'].requiredLength}}
+                    </span>
+                    <span *ngIf="fc['email']?.errors?.['pattern']" translate>
+                        <span translate>Invalid Email</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="flex-col">
+                <input type="text" formControlName="phone" class="border p-2 rounded w-full" style="height: 40px;"
+                    [placeholder]="language == 'en' ? 'Mobile Number' : '  رقم الهاتف'" />
+                <div *ngIf="fc['phone'].invalid" class="mt-1 text-red-600">
+                    <span *ngIf="fc['phone']?.errors?.['maxlength']" translate>
+                        <span translate>MaxLengthCharacters</span>{{fc['phone'].errors?.['maxlength'].requiredLength}}
+                    </span>
+                    <span *ngIf="fc['phone']?.errors?.['pattern']" translate>
+                        <span translate>Invalid Mobile Number</span>{{fc['phone'].errors?.['pattern'].requiredLength}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-center mt-4">
+            <!-- Clear Button -->
+            <button type="button" class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none me-4"
+                (click)="clear()">
+                <svg class="w-4 h-4 mx-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.9128 3.08687C11.1406 3.31468 11.1406 3.68402 10.9128 3.91183L7.82528 6.99935L10.9128 10.0869C11.1406 10.3147 11.1406 10.684 10.9128 10.9118C10.685 11.1396 10.3157 11.1396 10.0878 10.9118L7.00032 7.82431L3.9128 10.9118C3.685 11.1396 3.31565 11.1396 3.08785 10.9118C2.86004 10.684 2.86004 10.3147 3.08785 10.0869L6.17537 6.99935L3.08785 3.91183C2.86004 3.68403 2.86004 3.31468 3.08785 3.08688C3.31565 2.85907 3.685 2.85907 3.91281 3.08688L7.00032 6.1744L10.0878 3.08687C10.3157 2.85906 10.685 2.85906 10.9128 3.08687Z"
+                        fill="#B4B4B4" />
+                </svg>
+                <span translate>user.clear</span>
+            </button>
+
+            <!-- Search Button -->
+            <button type="submit"
+                class="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-black focus:outline-none">
+                <span translate>user.search</span>
+            </button>
+        </div>
+    </form>
+
+    <div class="global-table-container">
+        <table class="w-full mt-4 border-collapse border border-gray-300 hidden sm:table">
+            <!-- Table Header -->
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border border-gray-300 text-left" [class.text-right]="language === 'ar'"
+                        [class.text-left]="language === 'en'">
+                        <span translate>user.fullName</span>
+                    </th>
+                    <th class="px-4 py-2 border border-gray-300 text-left" [class.text-right]="language === 'ar'"
+                        [class.text-left]="language === 'en'">
+                        <span translate>user.email</span>
+                    </th>
+                    <th class="px-4 py-2 border border-gray-300 text-left" [class.text-right]="language === 'ar'"
+                        [class.text-left]="language === 'en'">
+                        <span translate>user.mobileNumber</span>
+                    </th>
+                </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+                <tr *ngFor="let element of paginatedUsers" class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border border-gray-300">
+                        {{ element.name }}
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        {{ element.email }}
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        {{ element.phone }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Responsive for Mobile -->
+        <div class="sm:hidden mt-4">
+            <div *ngFor="let element of paginatedUsers" class="border border-gray-300 p-4 mb-4 rounded bg-white">
+                <div>
+                    <span class="font-semibold text-gray-700" translate>user.fullName</span>:
+                    <span>{{ element.name }}</span>
+                </div>
+                <div>
+                    <span class="font-semibold text-gray-700" translate>user.email</span>:
+                    <span>{{ element.email }}</span>
+                </div>
+                <div>
+                    <span class="font-semibold text-gray-700" translate>user.mobileNumber</span>:
+                    <span>{{ element.phone }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Data Available -->
+        <div *ngIf="!resultsLength" class="text-center py-8">
+            <div class="mt-4 text-gray-500" translate>noDataAvailable</div>
+        </div>
+
+        <!-- Paginator -->
+        <div class="flex items-center justify-between mt-4">
+            <button class="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300" aria-label="Previous Page"
+                (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+                <span translate>user.previous</span>
+            </button>
+            <span class="text-gray-500"><span translate>user.page</span> {{ currentPage }} <span
+                    translate>user.of</span> {{ totalPages }}</span>
+            <button class="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300" aria-label="Next Page"
+                (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                <span translate>user.next</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>

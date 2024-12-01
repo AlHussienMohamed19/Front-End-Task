@@ -1,0 +1,22 @@
+/* Set fixed widths for the columns */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 300px !important;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 300px !important;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    white-space: normal !important;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 300px !important;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    white-space: normal !important;
+}
+

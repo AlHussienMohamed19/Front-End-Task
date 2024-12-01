@@ -1,0 +1,6 @@
+<div style="z-index: 99999;" *ngIf="loaderService.loaderState$ | async" class="spinnerParent text-center">
+    <div class="spinner">
+        <span class="loader"></span>
+        <h5 class="mt-2" style="color: #1ED6BB;" translate>load</h5>
+    </div>
+</div>
